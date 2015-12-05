@@ -5,8 +5,22 @@ USER root
 ADD ./ffmpeg-next.list /etc/apt/sources.list.d/ffmpeg-next.list
 
 # install
-RUN apt-get update && \
-    apt-get install -y --force-yes rtorrent unzip unrar-free mediainfo curl php5-fpm php5-cli php5-geoip nginx wget ffmpeg supervisor && \
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5C50E96D8EFE5982 && \
+    apt-get update -q && \
+    apt-get install -qy \
+        curl \
+        ffmpeg \
+        mediainfo \
+        nginx \
+        php5-cli \
+        php5-fpm \
+        php5-geoip \
+        rtorrent \
+        supervisor \
+        unrar-free \
+        unzip \
+        wget \
+        && \
     rm -rf /var/lib/apt/lists/*
 
 # configure nginx
