@@ -60,5 +60,5 @@ else
     sed -i 's/auth_basic/#auth_basic/g' /etc/nginx/sites-enabled/$site
 fi
 
+supervisorctl start rtorrent
 nginx -g "daemon off;"
-
