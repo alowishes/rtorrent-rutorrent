@@ -31,7 +31,7 @@ mkdir -p /downloads/watch
 chown -R $RT_UID:$RT_GID /var/www/rutorrent
 chown -R $RT_UID:$RT_GID /home/rtorrent
 chown -R $RT_UID:$RT_GID /downloads
-chmod -R g+w /downloads/.config
+chmod -R 775 /downloads
 
 # Remove old files
 rm -f /downloads/.session/rtorrent.lock
