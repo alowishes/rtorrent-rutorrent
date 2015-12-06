@@ -35,7 +35,6 @@ RUN chown -R www-data:www-data /var/www/rutorrent
 # Configure rtorrent user
 RUN useradd -d /home/rtorrent -m -s /bin/bash rtorrent
 ADD .rtorrent.rc /home/rtorrent/
-RUN chown -R rtorrent:rtorrent /home/rtorrent
 
 # Add nginx settings
 ADD rutorrent-*.nginx /root/
