@@ -1,10 +1,10 @@
 FROM ubuntu
 USER root
 
-# add ffmpeg ppa
+# Add ffmpeg ppa
 ADD ./ffmpeg-next.list /etc/apt/sources.list.d/ffmpeg-next.list
 
-# install
+# Install packages
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5C50E96D8EFE5982 && \
     apt-get update -q && \
     apt-get install -qy \
@@ -23,10 +23,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5C50E96D8EFE5982 &&
         && \
     rm -rf /var/lib/apt/lists/*
 
-# configure nginx
-ADD rutorrent-*.nginx /root/
-
-# download rutorrent
+# Download and install rutorrent
 RUN mkdir -p /var/www && \
     wget https://bintray.com/artifact/download/novik65/generic/ruTorrent-3.7.zip && \
     unzip ruTorrent-3.7.zip && \
@@ -35,15 +32,18 @@ RUN mkdir -p /var/www && \
 ADD ./config.php /var/www/rutorrent/conf/
 RUN chown -R www-data:www-data /var/www/rutorrent
 
-# configure rtorrent
+# Configure rtorrent user
 RUN useradd -d /home/rtorrent -m -s /bin/bash rtorrent
 ADD .rtorrent.rc /home/rtorrent/
 RUN chown -R rtorrent:rtorrent /home/rtorrent
 
-# add startup script
+# Add nginx settings
+ADD rutorrent-*.nginx /root/
+
+# Add startup script
 ADD startup.sh /root/
 
-# configure supervisor
+# Configure supervisor
 ADD supervisord.conf /etc/supervisor/conf.d/
 
 EXPOSE 80
