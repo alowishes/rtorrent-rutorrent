@@ -30,7 +30,6 @@ RUN mkdir -p /var/www && \
     mv ruTorrent-master /var/www/rutorrent && \
     rm ruTorrent-3.7.zip
 ADD ./config.php /var/www/rutorrent/conf/
-RUN chown -R www-data:www-data /var/www/rutorrent
 
 # Configure rtorrent user
 RUN useradd -d /home/rtorrent -m -s /bin/bash rtorrent
