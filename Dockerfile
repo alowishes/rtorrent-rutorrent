@@ -52,4 +52,4 @@ EXPOSE 49160
 EXPOSE 49161
 VOLUME /downloads
 
-CMD ["supervisord"]
+CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
