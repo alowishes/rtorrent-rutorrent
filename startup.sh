@@ -22,10 +22,9 @@ sed -i -- 's/owner = www-data/owner = '"$usr"'/g' /etc/php5/fpm/pool.d/www.conf
 sed -i -- 's/group = www-data/group = '"$grp"'/g' /etc/php5/fpm/pool.d/www.conf
 
 # Create folders
-mkdir -p /downloads/.session
-mkdir -p /downloads/.config/settings
-mkdir -p /downloads/.config/torrents
-mkdir -p /downloads/watch
+mkdir -p /downloads/.rtorrent/session
+mkdir -p /downloads/.rtorrent/config/torrents
+mkdir -p /downloads/.rtorrent/watch
 
 # Update directory permissions
 chown -R $RT_UID:$RT_GID /var/www/rutorrent
@@ -34,7 +33,7 @@ chown -R $RT_UID:$RT_GID /downloads
 chmod -R 775 /downloads
 
 # Remove old files
-rm -f /downloads/.session/rtorrent.lock
+rm -f /downloads/.rtorrent/session/rtorrent.lock
 rm -f /etc/nginx/sites-enabled/*
 rm -f /var/www/rutorrent/.htpasswd
 rm -rf /etc/nginx/ssl
@@ -43,18 +42,18 @@ rm -rf /etc/nginx/ssl
 site=rutorrent-basic.nginx
 
 # Check if TLS needed
-if [[ -e /downloads/nginx.key && -e /downloads/nginx.crt ]]; then
+if [[ -e /downloads/.rtorrent/nginx.key && -e /downloads/.rtorrent/nginx.crt ]]; then
     mkdir -p /etc/nginx/ssl
-    cp /downloads/nginx.crt /etc/nginx/ssl/
-    cp /downloads/nginx.key /etc/nginx/ssl/
+    cp /downloads/.rtorrent/nginx.crt /etc/nginx/ssl/
+    cp /downloads/.rtorrent/nginx.key /etc/nginx/ssl/
     site=rutorrent-tls.nginx
 fi
 
 cp /root/$site /etc/nginx/sites-enabled/
 
 # Check if .htpasswd presents
-if [ -e /downloads/.htpasswd ]; then
-    cp /downloads/.htpasswd /var/www/rutorrent/ && chmod 755 /var/www/rutorrent/.htpasswd && chown www-data:www-data /var/www/rutorrent/.htpasswd
+if [ -e /downloads/.rtorrent/.htpasswd ]; then
+    cp /downloads/.rtorrent/.htpasswd /var/www/rutorrent/ && chmod 755 /var/www/rutorrent/.htpasswd && chown www-data:www-data /var/www/rutorrent/.htpasswd
 else
     # Disable basic auth
     sed -i 's/auth_basic/#auth_basic/g' /etc/nginx/sites-enabled/$site

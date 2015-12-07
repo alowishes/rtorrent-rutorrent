@@ -18,17 +18,17 @@ Exposed:
  - Incoming connections port: 49161
  - Downloads volume: /downloads
  - rtorrent scratch files (watch and .session will be created automatically): /downloads
- - ruTorrent ui config (config will be created automatically): /downloads/config
+ - ruTorrent ui config (config will be created automatically): /downloads/.rtorrent/config
 
 ----------
-ruTorrent UI configuration stored outside the container in /downloads/config to ease the container upgrades.
+ruTorrent UI configuration stored outside the container in /downloads/.rtorrent/config to ease the container upgrades.
 
 ----------
 Adding basic auth:
 
-Put .htpasswd into your /downloads volume root, the container will re-read .htpasswd each time it starts. To remote auth, simply remove .htpasswd and restart your container.
+Put .htpasswd into your /downloads/.rtorrent/ folder, the container will re-read .htpasswd each time it starts. To remote auth, simply remove .htpasswd and restart your container.
 
-Instructions on how to generate .htpasswd can be found here: [Nginx FAQ][1] 
+Instructions on how to generate .htpasswd can be found here: [Nginx FAQ][1]
 
     $ printf "John:$(openssl passwd -crypt V3Ry)\n" >> .htpasswd # this example uses crypt encryption
 
@@ -41,7 +41,7 @@ Instructions on how to generate .htpasswd can be found here: [Nginx FAQ][1]
 ----------
 Adding TLS/SSL:
 
-Put your keyfile (shall be named nginx.key) and your certificate (nginx.crt) into /dowloads volume root, the container looks for these files each time it starts.
+Put your keyfile (shall be named nginx.key) and your certificate (nginx.crt) into /downloads/.rtorrent/ folder, the container looks for these files each time it starts.
 
 Generate a self-signed certificate:
 
@@ -61,7 +61,7 @@ Nginx TLS/SSL is configured as follwoing:
 ----------
 Basic auth secured with TLS/SSL:
 
-Apparently, put .htpasswd, nginx.key and nginx.crt into /downloads root.
+Apparently, put .htpasswd, nginx.key and nginx.crt into /downloads/.rtorrent/ folder.
 
 ----------
 Example, 64-bit:
