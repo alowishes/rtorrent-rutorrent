@@ -31,6 +31,8 @@ chown -R $RT_UID:$RT_GID /var/www/rutorrent
 chown -R $RT_UID:$RT_GID /home/rtorrent
 chown -R $RT_UID:$RT_GID /downloads/.rtorrent
 chmod -R 775 /downloads/.rtorrent
+chown $RT_UID:$RT_GID /downloads
+chmod 775 /downloads
 
 # Remove old files
 rm -f /downloads/.rtorrent/session/rtorrent.lock
@@ -61,6 +63,3 @@ fi
 
 # Start supervisor
 exec supervisord -c /etc/supervisor/conf.d/supervisord.conf
-
-# Start nginx
-exec nginx -g "daemon off;"
