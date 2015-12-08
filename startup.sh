@@ -32,7 +32,7 @@ chown -R $RT_UID:$RT_GID /home/rtorrent
 chown -R $RT_UID:$RT_GID /downloads/.rtorrent
 chmod -R 775 /downloads/.rtorrent
 chown $RT_UID:$RT_GID /downloads
-chmod 775 /downloads
+chmod 755 /downloads
 
 # Remove old files
 rm -f /downloads/.rtorrent/session/rtorrent.lock
