@@ -5,7 +5,7 @@ RT_UID=${USR_ID:=1000}
 RT_GID=${GRP_ID:=100}
 
 # Make sure the specified group exists
-getent group $RT_GID
+getent group $RT_GID > /dev/null
 if [ $? -ne 0 ]; then
     groupadd -g $RT_GID rtorrent
 fi
@@ -29,8 +29,8 @@ mkdir -p /downloads/.rtorrent/watch
 # Update directory permissions
 chown -R $RT_UID:$RT_GID /var/www/rutorrent
 chown -R $RT_UID:$RT_GID /home/rtorrent
-chown -R $RT_UID:$RT_GID /downloads
-chmod -R 775 /downloads
+chown -R $RT_UID:$RT_GID /downloads/.rtorrent
+chmod -R 775 /downloads/.rtorrent
 
 # Remove old files
 rm -f /downloads/.rtorrent/session/rtorrent.lock
@@ -59,4 +59,8 @@ else
     sed -i 's/auth_basic/#auth_basic/g' /etc/nginx/sites-enabled/$site
 fi
 
-nginx -g "daemon off;"
+# Start supervisor
+exec supervisord -c /etc/supervisor/conf.d/supervisord.conf
+
+# Start nginx
+exec nginx -g "daemon off;"
