@@ -4,13 +4,8 @@
 RT_UID=${USR_ID:=1000}
 RT_GID=${GRP_ID:=100}
 
-# Make sure the specified group exists
-getent group $RT_GID > /dev/null
-if [ $? -ne 0 ]; then
-    groupadd -g $RT_GID rtorrent
-fi
-
-# Update users
+# Update group and user
+groupmod -g $RT_GID rtorrent
 usermod -u $RT_UID -g $RT_GID rtorrent
 
 # Update nginx and php-fpm settings
