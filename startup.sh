@@ -57,7 +57,7 @@ cp /root/$site /etc/nginx/sites-enabled/
 
 # Check if .htpasswd presents
 if [ -e /downloads/.rtorrent/.htpasswd ]; then
-    cp /downloads/.rtorrent/.htpasswd /var/www/rutorrent/ && chmod 755 /var/www/rutorrent/.htpasswd && chown www-data:www-data /var/www/rutorrent/.htpasswd
+    cp /downloads/.rtorrent/.htpasswd /var/www/rutorrent/ && chmod 755 /var/www/rutorrent/.htpasswd && chown $RT_UID:$RT_GID /var/www/rutorrent/.htpasswd
 else
     # Disable basic auth
     sed -i 's/auth_basic/#auth_basic/g' /etc/nginx/sites-enabled/$site
