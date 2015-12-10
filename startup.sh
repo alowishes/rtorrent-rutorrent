@@ -21,6 +21,12 @@ mkdir -p /downloads/.rtorrent/session
 mkdir -p /downloads/.rtorrent/config/torrents
 mkdir -p /downloads/.rtorrent/watch
 
+# Link rtorrent settings if any are found
+if [ -e /downloads/.rtorrent/.rtorrent.rc ]; then
+    rm /home/rtorrent/.rtorrent.rc
+    ln -s /downloads/.rtorrent/.rtorrent.rc /home/rtorrent/
+fi
+
 # Update directory permissions
 chown -R $RT_UID:$RT_GID /var/www/rutorrent
 chown -R $RT_UID:$RT_GID /home/rtorrent
@@ -46,6 +52,7 @@ if [[ -e /downloads/.rtorrent/nginx.key && -e /downloads/.rtorrent/nginx.crt ]];
     site=rutorrent-tls.nginx
 fi
 
+# Enable site
 cp /root/$site /etc/nginx/sites-enabled/
 
 # Check if .htpasswd presents
