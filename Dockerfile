@@ -38,8 +38,9 @@ ADD .rtorrent.rc /home/rtorrent/
 # Add nginx settings
 ADD rutorrent-*.nginx /root/
 
-# Add startup script
+# Add startup & shudown scripts
 ADD startup.sh /root/
+ADD shutdown.sh /root/
 
 # Configure supervisor
 ADD supervisord.conf /etc/supervisor/conf.d/
