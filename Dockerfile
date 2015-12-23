@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu
 USER root
 
 # Add ffmpeg ppa
