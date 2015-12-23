@@ -25,7 +25,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5C50E96D8EFE5982 &&
 
 # Download and install rutorrent
 RUN mkdir -p /var/www && \
-    wget https://bintray.com/artifact/download/novik65/generic/ruTorrent-3.7.zip && \
+    curl -LO https://bintray.com/artifact/download/novik65/generic/ruTorrent-3.7.zip && \
     unzip ruTorrent-3.7.zip && \
     mv ruTorrent-master /var/www/rutorrent && \
     rm ruTorrent-3.7.zip
