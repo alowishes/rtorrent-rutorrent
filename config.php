@@ -25,7 +25,7 @@
 	$overwriteUploadedTorrents = false;     // Overwrite existing uploaded torrents in profile/torrents directory or make unique name
 
 	$topDirectory = '/';			// Upper available directory. Absolute path with trail slash.
-	$forbidUserSettings = false;
+	$forbidUserSettings = true;
 
 	$scgi_port = 5000;
 	$scgi_host = "127.0.0.1";
