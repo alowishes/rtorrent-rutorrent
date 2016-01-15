@@ -15,6 +15,7 @@ sed -i -- 's/user www-data;/user '"$usr"' '"$grp"';/g' /etc/nginx/nginx.conf
 sed -i -- 's/user = www-data/user = '"$usr"'/g' /etc/php5/fpm/pool.d/www.conf
 sed -i -- 's/owner = www-data/owner = '"$usr"'/g' /etc/php5/fpm/pool.d/www.conf
 sed -i -- 's/group = www-data/group = '"$grp"'/g' /etc/php5/fpm/pool.d/www.conf
+sed -i -- 's/memory_limit = 128M/memory_limit = 1024M/g' /etc/php5/fpm/php.ini
 
 # Create folders
 mkdir -p /downloads/.rtorrent/session
