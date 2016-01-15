@@ -3,6 +3,8 @@
 # Set rtorrent user and group id
 RT_UID=${USR_ID:=1000}
 RT_GID=${GRP_ID:=100}
+# Set special administrator group on .rtorrent folder if specified
+RT_ADM=${ADM_GID:=100}
 
 # Update group and user
 groupmod -g $RT_GID rtorrent
@@ -31,9 +33,9 @@ fi
 # Update directory permissions
 chown -R $RT_UID:$RT_GID /var/www/rutorrent
 chown -R $RT_UID:$RT_GID /home/rtorrent
-chown -R $RT_UID:$RT_GID /downloads/.rtorrent
-chmod -R 775 /downloads/.rtorrent
+chown $RT_UID:$RT_ADM /downloads/.rtorrent
 chown $RT_UID:$RT_GID /downloads
+chmod 770 /downloads/.rtorrent
 chmod 755 /downloads
 
 # Remove old files
