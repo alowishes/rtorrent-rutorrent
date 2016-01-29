@@ -34,6 +34,10 @@ fi
 chown -R $RT_UID:$RT_GID /var/www/rutorrent
 chown -R $RT_UID:$RT_GID /home/rtorrent
 chown $RT_UID:$RT_ADM /rtorrent
+chown $RT_UID:$RT_ADM /rtorrent/session
+chown $RT_UID:$RT_ADM /rtorrent/config/
+chown $RT_UID:$RT_ADM /rtorrent/config/torrents
+chown $RT_UID:$RT_ADM /rtorrent/watch
 chown $RT_UID:$RT_GID /downloads
 chmod 770 /rtorrent
 chmod 755 /downloads
