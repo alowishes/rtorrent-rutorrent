@@ -12,7 +12,7 @@
 	@define('LOG_RPC_CALLS', false, true);
 	@define('LOG_RPC_FAULTS', true, true);
 
-	// for php	
+	// for php
 	@define('PHP_USE_GZIP', false, true);
 	@define('PHP_GZIP_LEVEL', 2, true);
 
@@ -30,8 +30,8 @@
 	$scgi_port = 5000;
 	$scgi_host = "127.0.0.1";
 
-	// For web->rtorrent link through unix domain socket 
-	// (scgi_local in rtorrent conf file), change variables 
+	// For web->rtorrent link through unix domain socket
+	// (scgi_local in rtorrent conf file), change variables
 	// above to something like this:
 	//
 	// $scgi_port = 0;
@@ -48,11 +48,11 @@
 	);
 
 	$localhosts = array( 			// list of local interfaces
-		"127.0.0.1", 
+		"127.0.0.1",
 		"localhost",
 	);
 
-	$profilePath = '/downloads/.rtorrent/config';	// Path to user profiles
+	$profilePath = '/rtorrent/config';	// Path to user profiles
 	$profileMask = 0775;			// Mask for files and directory creation in user profiles.
 						// Both Webserver and rtorrent users must have read-write access to it.
 						// For example, if Webserver and rtorrent users are in the same group then the value may be 0770.

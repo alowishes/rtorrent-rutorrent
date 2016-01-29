@@ -1,9 +1,6 @@
 Docker container with rTorrent and ruTorrent (stable and latest from github)
 ============================================================================
 
-(To get github's latests pick 64-latest and 32-latest tags)
-----------
-
 Multiple processes inside the container managed by supervisor:
 
 - nginx
@@ -17,16 +14,13 @@ Exposed:
  - DHT UDP port: 49160
  - Incoming connections port: 49161
  - Downloads volume: /downloads
- - rtorrent scratch files (watch and .session will be created automatically): /downloads
- - ruTorrent ui config (config will be created automatically): /downloads/.rtorrent/config
-
-----------
-ruTorrent UI configuration stored outside the container in /downloads/.rtorrent/config to ease the container upgrades.
+ - rtorrent scratch files (watch and .session will be created automatically): /rtorrent/
+ - ruTorrent ui config (config will be created automatically): /rtorrent/config
 
 ----------
 Adding basic auth:
 
-Put .htpasswd into your /downloads/.rtorrent/ folder, the container will re-read .htpasswd each time it starts. To remote auth, simply remove .htpasswd and restart your container.
+Put .htpasswd into your /rtorrent/ folder, the container will re-read .htpasswd each time it starts. To remote auth, simply remove .htpasswd and restart your container.
 
 Instructions on how to generate .htpasswd can be found here: [Nginx FAQ][1]
 
@@ -41,7 +35,7 @@ Instructions on how to generate .htpasswd can be found here: [Nginx FAQ][1]
 ----------
 Adding TLS/SSL:
 
-Put your keyfile (shall be named nginx.key) and your certificate (nginx.crt) into /downloads/.rtorrent/ folder, the container looks for these files each time it starts.
+Put your keyfile (shall be named nginx.key) and your certificate (nginx.crt) into /rtorrent/ folder, the container looks for these files each time it starts.
 
 Generate a self-signed certificate:
 
@@ -61,22 +55,7 @@ Nginx TLS/SSL is configured as follwoing:
 ----------
 Basic auth secured with TLS/SSL:
 
-Apparently, put .htpasswd, nginx.key and nginx.crt into /downloads/.rtorrent/ folder.
-
-----------
-Example, 64-bit:
-
-Insecure
-
-    $ docker run -dt --name rtorrent-rutorrent -p 8080:80 -p 49160:49160/udp -p 49161:49161 -v ~/test:/downloads diameter/rtorrent-rutorrent:64
-
-Secure
-
-    $ docker run -dt --name rtorrent-rutorrent -p 443:443 -p 49160:49160/udp -p 49161:49161 -v ~/test:/downloads diameter/rtorrent-rutorrent:64
-
-Example, map both secure and insecure ports, 32-bit:
-
-    $ docker run -dt --name rtorrent-rutorrent -p 8080:80 -p 443:443 -p 49160:49160/udp -p 49161:49161 -v ~/test:/downloads diameter/rtorrent-rutorrent:32
+Apparently, put .htpasswd, nginx.key and nginx.crt into /rtorrent/ folder.
 
 ----------
 Access web-interface: enter http://your_host_address:8080 in a browser for insecure version and https://your_host_address for secure version
