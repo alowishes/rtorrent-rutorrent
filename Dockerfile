@@ -39,8 +39,8 @@ ADD .rtorrent.rc /home/rtorrent/
 ADD rutorrent-*.nginx /root/
 
 # Add startup & shudown scripts
-ADD startup.sh /
-ADD shutdown.sh /
+ADD startup.sh /startup
+ADD shutdown.sh /shutdown
 
 # Configure supervisor
 ADD supervisord.conf /etc/supervisor/conf.d/
@@ -52,4 +52,4 @@ EXPOSE 49161
 VOLUME /downloads
 VOLUME /rtorrent
 
-CMD ["/startup.sh"]
+CMD ["/startup"]
