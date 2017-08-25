@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set rtorrent user and group id
-RT_UID=${USR_ID:=1000}
+RT_UID=${USR_ID:=99}
 RT_GID=${GRP_ID:=100}
 # Set special administrator group on .rtorrent folder if specified
 RT_ADM=${ADM_GID:=100}
